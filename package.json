@@ -1,0 +1,28 @@
+{
+  "name": "liquidity-providers-reward-contracts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "bash scripts/test.sh",
+    "coverage": "SOLIDITY_COVERAGE=true bash scripts/test.sh"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@openzeppelin/cli": "2.8.2",
+    "@openzeppelin/contracts-ethereum-package": "3.0.0",
+    "dotenv": "8.2.0",
+    "ethers": "^5.0.8",
+    "ganache-cli": "6.10.1",
+    "solidity-coverage": "0.7.9",
+    "truffle": "5.1.26",
+    "truffle-hdwallet-provider": "1.0.17"
+  },
+  "devDependencies": {
+    "@openzeppelin/test-environment": "0.1.4",
+    "@openzeppelin/test-helpers": "0.5.6",
+    "chai": "4.2.0",
+    "mocha": "8.1.1"
+  }
+}
