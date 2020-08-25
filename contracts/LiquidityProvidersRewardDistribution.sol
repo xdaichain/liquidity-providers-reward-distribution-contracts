@@ -10,7 +10,7 @@ contract LiquidityProvidersRewardDistribution is OwnableUpgradeSafe {
     IERC20 public token;
     address public distributor;
 
-    event Distributed(uint256 snapshotBlockNumber);
+    event Distributed(uint256 snapshotBlockNumber, uint256 total, uint256 fee);
 
     function initialize(
         address _owner,
@@ -33,12 +33,21 @@ contract LiquidityProvidersRewardDistribution is OwnableUpgradeSafe {
     function distribute(
         uint256 _snapshotBlockNumber,
         address[] calldata _liquidityProviders,
-        uint256[] calldata _rewards
+        uint256[] calldata _rewards,
+        uint256 _fee
     ) external {
         require(distributor == _msgSender(), "caller is not the distributor");
+        uint256 total;
         for (uint256 i = 0; i < _liquidityProviders.length; i++) {
             token.transfer(_liquidityProviders[i], _rewards[i]);
+            total += _rewards[i];
         }
-        emit Distributed(_snapshotBlockNumber);
+        token.transfer(distributor, _fee);
+        total += _fee;
+        emit Distributed(_snapshotBlockNumber, total, _fee);
+    }
+
+    function getBalanceAndBlockNumber() external view returns (uint256 balance, uint256 blockNumber) {
+        return (token.balanceOf(address(this)), block.number);
     }
 }

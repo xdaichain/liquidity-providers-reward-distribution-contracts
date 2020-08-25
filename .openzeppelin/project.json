@@ -1,6 +1,8 @@
 {
   "manifestVersion": "2.2",
-  "contracts": {},
+  "contracts": {
+    "LiquidityProvidersRewardDistribution": "LiquidityProvidersRewardDistribution"
+  },
   "dependencies": {},
   "name": "liquidity-providers-reward-contracts",
   "version": "1.0.0",
