@@ -37,7 +37,7 @@ contract LiquidityProvidersRewardDistribution is OwnableUpgradeSafe {
         uint256 _fee
     ) external {
         require(distributor == _msgSender(), "caller is not the distributor");
-        require(_liquidityProviders.length == _rewards.length);
+        require(_liquidityProviders.length == _rewards.length, "different sizes of arrays");
         uint256 total;
         for (uint256 i = 0; i < _liquidityProviders.length; i++) {
             token.transfer(_liquidityProviders[i], _rewards[i]);
