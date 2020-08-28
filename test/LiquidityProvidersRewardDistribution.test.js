@@ -55,6 +55,7 @@ contract('LiquidityProvidersRewardDistribution', accounts => {
       const contractBalance = ether('1001');
       await stakeToken.mint(distributionContract.address, contractBalance);
       const receipt = await distributionContract.distribute(
+        'uniswap',
         snapshotBlockNumber,
         liquidityProviders,
         rewards,
@@ -74,7 +75,14 @@ contract('LiquidityProvidersRewardDistribution', accounts => {
       const contractBalance = ether('1000');
       await stakeToken.mint(distributionContract.address, contractBalance);
       await expectRevert(
-        distributionContract.distribute(snapshotBlockNumber, liquidityProviders, rewards, fee, { from: accounts[2] }),
+        distributionContract.distribute(
+          'uniswap',
+          snapshotBlockNumber,
+          liquidityProviders,
+          rewards,
+          fee,
+          { from: accounts[2] }
+        ),
         'caller is not the distributor',
       );
     });
@@ -82,7 +90,14 @@ contract('LiquidityProvidersRewardDistribution', accounts => {
       const contractBalance = ether('10');
       await stakeToken.mint(distributionContract.address, contractBalance);
       await expectRevert(
-        distributionContract.distribute(snapshotBlockNumber, liquidityProviders, rewards, fee, { from: distributor }),
+        distributionContract.distribute(
+          'uniswap',
+          snapshotBlockNumber,
+          liquidityProviders,
+          rewards,
+          fee,
+          { from: distributor }
+        ),
         'ERC20: transfer amount exceeds balance',
       );
       expect(await stakeToken.balanceOf(distributionContract.address)).to.be.bignumber.equal(contractBalance);

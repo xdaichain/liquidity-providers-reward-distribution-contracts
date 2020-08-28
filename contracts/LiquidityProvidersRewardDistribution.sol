@@ -11,6 +11,7 @@ contract LiquidityProvidersRewardDistribution is OwnableUpgradeSafe {
     address public distributor;
 
     event Distributed(
+        string pool,
         uint256 snapshotBlockNumber,
         uint256 numberOfRewards,
         uint256 total,
@@ -36,6 +37,7 @@ contract LiquidityProvidersRewardDistribution is OwnableUpgradeSafe {
     }
 
     function distribute(
+        string calldata _pool,
         uint256 _snapshotBlockNumber,
         address[] calldata _liquidityProviders,
         uint256[] calldata _rewards,
@@ -51,7 +53,7 @@ contract LiquidityProvidersRewardDistribution is OwnableUpgradeSafe {
         }
         token.transfer(distributor, _fee);
         total += _fee;
-        emit Distributed(_snapshotBlockNumber, numberOfRewards, total, _fee);
+        emit Distributed(_pool, _snapshotBlockNumber, numberOfRewards, total, _fee);
     }
 
     function getBalanceAndBlockNumber() external view returns (uint256 balance, uint256 blockNumber) {
