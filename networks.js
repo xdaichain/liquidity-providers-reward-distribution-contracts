@@ -13,7 +13,7 @@ module.exports = {
       host: 'localhost',
       port: 8545,
       gas: 5000000,
-      gasPrice: 5e9,
+      gasPrice: 5e11,
       networkId: '*',
     },
     kovan: {
@@ -23,7 +23,7 @@ module.exports = {
     },
     mainnet: {
       provider: getProvider('mainnet'),
-      gasPrice: 7e10,
+      gasPrice: 5e11,
       networkId: 1,
     },
   },
